@@ -42,9 +42,9 @@ scene.add( torus )
 
 const controls = new OrbitControls(camera, renderer.domElement);
 
+// NOTE: Vite requires images be in a public folder, otherwise they load white
 const loader = new THREE.TextureLoader();
 scene.background = loader.load( '../public/space.jpg' );
-
 
 function animate() {
   requestAnimationFrame( animate );
@@ -71,3 +71,10 @@ function addStar() {
 }
 
 Array(200).fill().forEach(addStar)
+
+const benitoTexture = new THREE.TextureLoader().load('../public/profile_pic.jpeg')
+const benito = new THREE.Mesh(
+  new THREE.BoxGeometry(3,3,3),
+  new THREE.MeshBasicMaterial( { map: benitoTexture } )
+)
+scene.add(benito)
