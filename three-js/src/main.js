@@ -48,6 +48,25 @@ const bgTexture = loader.load( '../public/space.jpg' );
 bgTexture.colorSpace = THREE.SRGBColorSpace;
 scene.background = bgTexture;
 
+// Camera stuff
+
+function moveCamera() {
+
+  const t = document.body.getBoundingClientRect().top;
+  moon.rotation.x += 0.05;
+  moon.rotation.y += 0.0075;
+  moon.rotation.z += 0.05;
+
+  benito.rotation.y += 0.01;
+  benito.rotation.z += 0.01;
+
+  camera.position.x = t * -0.01;
+  camera.position.y = t * -0.0002;
+  camera.position.z = t * -0.0002;
+}
+
+document.body.onscroll = moveCamera
+
 function animate() {
   requestAnimationFrame( animate );
   torus.rotation.x += 0.01;
@@ -82,7 +101,6 @@ const benito = new THREE.Mesh(
 scene.add(benito)
 
 // moon
-
 const moonTexture = new THREE.TextureLoader().load('../public/moon.jpg');
 const normalTexture = new THREE.TextureLoader().load('../public/normal.jpg');
 
@@ -95,3 +113,6 @@ const moon = new THREE.Mesh(
 )
 
 scene.add(moon)
+
+moon.position.z = 30
+moon.position.setX(-10);
