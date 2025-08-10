@@ -42,6 +42,10 @@ scene.add( torus )
 
 const controls = new OrbitControls(camera, renderer.domElement);
 
+const loader = new THREE.TextureLoader();
+scene.background = loader.load( '../public/space.jpg' );
+
+
 function animate() {
   requestAnimationFrame( animate );
   torus.rotation.x += 0.01;
