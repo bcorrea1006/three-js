@@ -28,8 +28,8 @@ const material = new THREE.MeshStandardMaterial( {color: 0xFF6347} );
 const torus = new THREE.Mesh( geometry, material );  // torus = geometry + material
 
 // Lights
-const pointLight = new THREE.PointLight(0xffffff, 20);
-pointLight.position.set(5, 5, 5);
+const pointLight = new THREE.PointLight(0xffffff, 50);
+pointLight.position.set(3, 3, 3);
 const ambientLight = new THREE.AmbientLight(0xffffff);
 scene.add(pointLight, ambientLight);
 
@@ -44,7 +44,9 @@ const controls = new OrbitControls(camera, renderer.domElement);
 
 // NOTE: Vite requires images be in a public folder, otherwise they load white
 const loader = new THREE.TextureLoader();
-scene.background = loader.load( '../public/space.jpg' );
+const bgTexture = loader.load( '../public/space.jpg' );
+bgTexture.colorSpace = THREE.SRGBColorSpace;
+scene.background = bgTexture;
 
 function animate() {
   requestAnimationFrame( animate );
@@ -78,3 +80,18 @@ const benito = new THREE.Mesh(
   new THREE.MeshBasicMaterial( { map: benitoTexture } )
 )
 scene.add(benito)
+
+// moon
+
+const moonTexture = new THREE.TextureLoader().load('../public/moon.jpg');
+const normalTexture = new THREE.TextureLoader().load('../public/normal.jpg');
+
+const moon = new THREE.Mesh(
+  new THREE.SphereGeometry( 3, 32, 32),
+  new THREE.MeshStandardMaterial({
+    map: moonTexture,
+    normalMap: normalTexture,
+  } )
+)
+
+scene.add(moon)
